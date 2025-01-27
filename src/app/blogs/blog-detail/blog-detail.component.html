@@ -1,0 +1,47 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <button
+        class="btn btn-outline-dark d-flex arr-btn"
+        (click)="navigateToBack()"
+      >
+        <strong class=""><i class="bi bi-arrow-left"></i></strong> Back
+      </button>
+    </div>
+  </div>
+  <div class="blogLoading row" *ngIf="isLoading">
+    <div class="col text-center m-4">
+      <strong>Loading...</strong>
+    </div>
+  </div>
+  <div class="row" *ngIf="!isLoading">
+    <div
+      class="d-flex flex-column align-items-center justify-content-between my-2"
+    >
+      <div class="">
+        <h1 class="my-2">{{ blogContent.title }}</h1>
+      </div>
+      <div class="my-2 d-flex align-items-center gap-2">
+        <span class="text-muted">{{ blogContent.created_at | date }} </span>
+        <span class="badge bg-secondary rounded-pill">{{
+          blogContent.category
+        }}</span>
+      </div>
+    </div>
+    <div class="blogImageWrapper col-xs-12 col-md-8 mx-auto">
+      <img
+        class="img-responsive"
+        src="{{ blogContent.photo_url }}"
+        alt="blog image"
+      />
+    </div>
+    <div class="col-xs-12 col-md-8 mx-auto my-2">
+      <div [innerHTML]="blogContent.content_html"></div>
+      <div class="mt-4">
+        <span class="text-muted"
+          >Last Update : {{ blogContent.updated_at }}</span
+        >
+      </div>
+    </div>
+  </div>
+</div>

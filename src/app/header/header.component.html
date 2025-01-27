@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand navbar-light bg-light mb-3">
+  <a class="navbar-brand" href="#">Blogs</a>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="d-flex ms-auto">
+      <ng-container *ngIf="!isLoggedIn; else loggedInTemplate">
+        <button class="btn btn-outline-dark mx-2" (click)="onClickLogin()">
+          LogIn
+        </button>
+        <button class="btn btn-outline-dark" (click)="onClickSignUP()">
+          SignUp
+        </button>
+      </ng-container>
+      <ng-template #loggedInTemplate>
+        <button class="btn btn-outline-dark" (click)="onClickLogout()">
+          LogOut
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</nav>

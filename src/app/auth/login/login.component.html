@@ -1,0 +1,90 @@
+<div
+  class="col-xs-12 col-md-8 mx-auto border border-2 p-3 m-4 rounded-2 main-container"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h1 class="text-center">Login</h1>
+      </div>
+    </div>
+    <form [formGroup]="loginform" (ngSubmit)="onlogin()">
+      <div class="row">
+        <div class="col">
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            class="form-control my-2"
+            id="email"
+            name="email"
+            formControlName="email"
+          />
+          <div
+            *ngIf="
+              loginform.get('email')?.invalid && loginform.get('email')?.touched
+            "
+            class="error"
+          >
+            Email is required and should be a valid email address
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label for="password">Password:</label>
+          <div class="input-group">
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              class="form-control"
+              [ngClass]="{
+                'invalid-group':
+                  loginform.get('password')?.invalid &&
+                  loginform.get('password')?.touched
+              }"
+              id="password"
+              name="password"
+              formControlName="password"
+            />
+            <button
+              type="button"
+              class="btn btn-outline-secondary btn-eye"
+              [ngClass]="{
+                'btn-invalid btn-outline-danger':
+                  loginform.get('password')?.invalid &&
+                  loginform.get('password')?.touched,
+              }"
+              (click)="togglePasswordVisibility()"
+            >
+              <i [class]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+            </button>
+          </div>
+          <div
+            *ngIf="
+              loginform.get('password')?.invalid &&
+              loginform.get('password')?.touched
+            "
+            class="error"
+          >
+            Minimum 8 digits password is required
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button type="submit" class="submit-btn btn btn-primary">
+            Login
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col d-flex align-items-center justify-content-center">
+    <p>Don't have an account? <a [routerLink]="['signup']">Sign up here</a></p>
+  </div>
+</div>
+<div class="col-xs-12 col-md-8 mx-auto">
+  <div *ngIf="errorMsg" class="alert alert-danger">
+    {{ errorMsg }}
+  </div>
+</div>

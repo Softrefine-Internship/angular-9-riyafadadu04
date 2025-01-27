@@ -1,0 +1,50 @@
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+.main-container {
+  max-width: 600px;
+  border: 1px solid #6c757d;
+  box-shadow: 0 0 10px #8281815c;
+}
+
+input {
+  margin: 5px 0;
+  border: 1px solid #6c757d;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.invalid-group {
+  border: 1px solid red;
+  border-radius: 4px;
+}
+
+.btn-invalid {
+  border-color: red;
+}
+
+.submit-btn {
+  margin: 10px 0;
+  width: 100%;
+  padding: 5px 20px;
+}
+
+.btn-eye {
+  font-size: 18px;
+  cursor: pointer;
+  margin: 5px 0;
+}
+
+@media screen and (max-width: 768px) {
+  label,
+  p {
+    font-size: 14px;
+  }
+  .submit-btn {
+    padding: 5px;
+  }
+}

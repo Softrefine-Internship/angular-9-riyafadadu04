@@ -1,0 +1,26 @@
+<div class="container-fluid mt-2">
+  <div class="grid">
+    <div
+      class="card grid-item"
+      *ngFor="let blog of blogs"
+      (click)="onblogClick(blog)"
+    >
+      <img [src]="blog.photo_url" class="card-img-top" [alt]="blog.title" />
+      <div class="card-body blog-card-body">
+        <h5 class="card-title">{{ blog.title }}</h5>
+        <p class="card-text">{{ blog.description }}</p>
+        <a routerLink="/blog/{{ blog.id }}" class="btn btn-light">
+          Read More
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center my-3" *ngIf="isLoading">
+    <strong>Loading...</strong>
+  </div>
+
+  <div class="text-center my-3" *ngIf="!hasMore && !isLoading">
+    <p>No more blogs to load.</p>
+  </div>
+</div>
