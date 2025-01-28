@@ -166,3 +166,8 @@
     <p>Already have an account? <a routerLink="/"> Login here.</a></p>
   </div>
 </div>
+<div class="col-xs-12 col-md-8 mx-auto">
+  <div *ngIf="errorMsg" class="alert alert-danger">
+    {{ errorMsg }}
+  </div>
+</div>

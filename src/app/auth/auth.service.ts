@@ -104,6 +104,9 @@ export class AuthService {
       return throwError(() => errorMessage);
     }
     switch (errorRes.error.error.message) {
+      case 'EMAIL_EXISTS':
+        errorMessage = 'This email address is already in use.';
+        break;
       case 'EMAIL_NOT_FOUND':
         errorMessage = 'This email address does not exist.';
         break;

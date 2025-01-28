@@ -12,6 +12,7 @@ export class SignupComponent implements OnInit {
   signupForm!: FormGroup;
   showPassword: boolean = false;
   showConfirmPassword: boolean = false;
+  errorMsg: string | null = null;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -74,6 +75,7 @@ export class SignupComponent implements OnInit {
           this.signupForm.reset();
         },
         (error) => {
+          this.errorMsg = error;
           console.error('Signup failed:', error);
         }
       );
