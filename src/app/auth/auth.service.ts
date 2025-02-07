@@ -15,8 +15,11 @@ export class AuthService {
 
   private _user = new BehaviorSubject<any>(null);
   user = this._user.asObservable();
+  private tokenExpirationTimer: any;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {
+    this.autoLogin();
+  }
 
   login(email: string, password: string): Observable<any> {
     const loginData = {
@@ -75,6 +78,42 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return !!localStorage.getItem('userData');
+  }
+
+  autoLogin() {
+    const userData: {
+      email: string;
+      userId: string;
+      token: string;
+      tokenExpirationDate: string;
+    } = JSON.parse(localStorage.getItem('userData')!);
+
+    if (!userData) {
+      return;
+    }
+
+    const loadedUser = {
+      email: userData.email,
+      userId: userData.userId,
+      token: userData.token,
+      tokenExpirationDate: new Date(userData.tokenExpirationDate),
+    };
+
+    if (new Date() < loadedUser.tokenExpirationDate) {
+      this._user.next(loadedUser);
+      const expirationDuration =
+        loadedUser.tokenExpirationDate.getTime() - new Date().getTime();
+      this.autoLogout(expirationDuration);
+      this.router.navigate(['/blog']);
+    } else {
+      this.logout();
+    }
+  }
+
+  autoLogout(expirationDuration: number) {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout();
+    }, expirationDuration);
   }
 
   private saveUserData(userId: string, userData: any): Observable<any> {
